@@ -1,0 +1,76 @@
+<h1 mat-dialog-title>Criar um Novo HOSPEDE</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formCriarAlterarHospede">
+
+            <!-- NOME CLIENTE  -->
+            <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input formControlName="nomeCliente"  matInput placeholder="nome"> 
+            </mat-form-field>
+
+            <!-- APELIDO CLIENTE  -->
+            <mat-form-field appearance="outline">
+                <mat-label>Apelido</mat-label>
+                <input formControlName="apelidoCliente" matInput placeholder="apelido"> 
+            </mat-form-field> 
+
+            <!-- EMAIL CLIENTE  -->
+            <mat-form-field appearance="outline">
+                <mat-label>Em@il</mat-label>
+                <input formControlName="email" matInput placeholder="em@ail"> 
+            </mat-form-field> 
+
+            <!-- TELEFONE CLIENTE  -->
+            <mat-form-field appearance="outline">
+                <mat-label>Telefone</mat-label>
+                <input formControlName="telefone" matInput placeholder="telefone"> 
+            </mat-form-field>
+
+            <!-- Hospede Related-->            
+            <mat-form-field appearance="outline">
+                <mat-label>Nacionalidade</mat-label>
+                <mat-select formControlName="nacionalidade" placeholder="nacionalidade">
+                    <mat-option value="portugal">Portugal</mat-option>
+                    <mat-option value="italia">Itália</mat-option>
+                    <mat-option value="inglaterra">Inglaterra</mat-option>
+                    <mat-option value="espanha">Espanha</mat-option>
+                    <mat-option value="...">...</mat-option>
+                    <mat-option value="caboverde">Cabo verde</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Numero Quarto</mat-label>
+                <mat-select formControlName="numeroQuarto" placeholder="quarto">
+                    <mat-option value="1001">1001</mat-option>
+                    <mat-option value="1101">1101</mat-option>
+                    <mat-option value="2001">2001</mat-option>
+                    <mat-option value="2101">2101</mat-option>
+                    <mat-option value="...">...</mat-option>
+                    <mat-option value="101">101</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <label for=""><h3>Ativo:</h3></label>
+            <mat-radio-group formControlName="ativo" >
+                <mat-radio-button value="true">
+                        Sim.
+                </mat-radio-button>
+                &nbsp;&nbsp;
+                <mat-radio-button value="false">
+                    Não.
+                </mat-radio-button>
+            </mat-radio-group>
+    
+            <label *ngIf="acao=='alterar'" for="dataCriacao" formControlName="dataCriacao">Data Criacao: </label>
+            <label *ngIf="acao=='alterar'" for="dataAtualizacao" formControlName="dataAtualizacao">  -   Data Atualizacao: </label>          
+            
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addCliente()">Guardar</button>
+    <button mat-raised-button color="secondary" style="margin-left: 8px;" (click)="resetFields()">Limpar</button>
+    <button mat-raised-button color="warn" style="margin-left: 8px;" mat-dialog-close>Cancelar</button>
+</div>

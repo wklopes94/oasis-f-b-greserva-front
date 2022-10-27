@@ -1,0 +1,199 @@
+<h1 mat-dialog-title>Criar uma Nova Reserva</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formCriarAlterarReserva">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Restaurante</mat-label>
+                <mat-select formControlName="restaurante" placeholder="restaurante">
+                    <mat-option *ngFor="let rest of dataSourceRestaurante" [value]="rest.id">{{rest.nome}}</mat-option>                
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Seating</mat-label>
+                <mat-select formControlName="seating" placeholder="seating">
+                    <mat-option *ngFor="let seat of dataSourceSeating" [value]="seat.id">{{seat.horaInicio}} - {{seat.horaFim}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Data Reserva</mat-label>
+                <input formControlName="dataReserva" matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <!--                        -->
+                        <!--cliente related -->
+                        <mat-card class="example-card">
+                            <mat-card-title>Informação Cliente</mat-card-title>
+                            <mat-card-subtitle>Cliente</mat-card-subtitle>
+                            <mat-card-content>
+                                <p>Introduza as Informações do Cliente.</p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Tipo</mat-label>
+                                    <mat-select formControlName="tipoCliente" placeholder="tipo" (selectionChange)="setTipoCliente()">
+                                        <mat-option value="hospede">Hospede</mat-option>
+                                        <mat-option value="particular">Particular</mat-option>
+                                        <mat-option value="grupo">Grupo</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Nome</mat-label>
+                                    <input formControlName="nomeCliente"  matInput placeholder="nome">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Apelido</mat-label>
+                                    <input formControlName="apelidoCliente" matInput placeholder="apelido">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Em@il</mat-label>
+                                    <input formControlName="email" matInput placeholder="em@ail">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Telefone</mat-label>
+                                    <input formControlName="telefone" matInput placeholder="telefone">
+                                </mat-form-field>
+
+                            </mat-card-content>
+
+                            <!-- Hospede Related-->
+                            <mat-card class="example-card" *ngIf="tipoCliente=='hospede'">
+                                <mat-card-title>Hospede</mat-card-title>
+                                <mat-card-subtitle>Introduza as Informações do Hospede</mat-card-subtitle>
+                                <mat-card-content>
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Nacionalidade</mat-label>
+                                    <mat-select formControlName="nacionalidade" placeholder="nacionalidade">
+                                        <mat-option value="portugal">Portugal</mat-option>
+                                        <mat-option value="italia">Itália</mat-option>
+                                        <mat-option value="inglaterra">Inglaterra</mat-option>
+                                        <mat-option value="espanha">Espanha</mat-option>
+                                        <mat-option value="...">...</mat-option>
+                                        <mat-option value="caboverde">Cabo verde</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Numero Quarto</mat-label>
+                                    <mat-select formControlName="numeroQuarto" placeholder="quarto">
+                                        <mat-option value="1001">1001</mat-option>
+                                        <mat-option value="1101">1101</mat-option>
+                                        <mat-option value="2001">2001</mat-option>
+                                        <mat-option value="2101">2101</mat-option>
+                                        <mat-option value="...">...</mat-option>
+                                        <mat-option value="101">101</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                </mat-card-content>
+                            </mat-card>
+
+                            <!-- Particular Related-->
+                            <mat-card class="example-card" *ngIf="tipoCliente=='particular'">
+                              <mat-card-title>Particular</mat-card-title>
+                              <mat-card-subtitle>Introduza as Informações do Particular</mat-card-subtitle>
+                              <mat-card-content>
+                                  <mat-form-field appearance="outline">
+                                      <mat-label>Observações:</mat-label>
+                                      <textarea formControlName="observacaoPartb" matInput></textarea>
+                                  </mat-form-field>
+                              </mat-card-content>
+                            </mat-card>
+
+
+                            <!-- Grupo Related-->
+                            <mat-card class="example-card" *ngIf="tipoCliente=='grupo'">
+                              <mat-card-title>Grupo</mat-card-title>
+                              <mat-card-subtitle>Introduza as Informações do Grupo</mat-card-subtitle>
+                              <mat-card-content>
+                                  <mat-form-field appearance="outline">
+                                      <mat-label>Instituição</mat-label>
+                                      <input formControlName="instituicao" matInput placeholder="instituição/empresa">
+                                  </mat-form-field>
+
+                                  <mat-form-field appearance="outline">
+                                      <mat-label>Descrição:</mat-label>
+                                      <textarea formControlName="observacaoGrupo" matInput></textarea>
+                                  </mat-form-field>
+
+                                  <mat-form-field appearance="outline">
+                                      <mat-label>Observações:</mat-label>
+                                      <textarea formControlName="descricaoGrupo" matInput></textarea>
+                                  </mat-form-field>
+
+                              </mat-card-content>
+                            </mat-card>
+
+                          </mat-card>
+            <!--                        -->
+            <mat-card>
+                <mat-form-field appearance="outline">
+                    <mat-label>Adultos</mat-label>
+                    <input formControlName="numeroAdultos" matInput type="number" placeholder="numero">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Crianças</mat-label>
+                    <input formControlName="numeroCrianca" matInput type="number" placeholder="numero">
+                </mat-form-field>
+
+                <!--       Pagamento-->
+                <mat-form-field appearance="outline">
+                    <mat-label>Pagamento</mat-label>
+                    <mat-select formControlName="pagamento" placeholder="pagamento">
+                        <mat-option *ngFor="let pag of dataSourcePagamentos" [value]="pag.id">{{pag.tipo}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <!--       Extras-->
+                <mat-form-field appearance="outline">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="estado" placeholder="estado">
+                        <mat-option *ngFor="let est of dataSourceEstados" [value]="est.id">{{est.valor}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card>
+
+            <mat-form-field appearance="fill">
+                <mat-label>EXTRAS:</mat-label>
+                <mat-select formControlName="extras" multiple>
+                  <mat-option *ngFor="let ext of dataSourceExtras" [value]="ext.id">{{ext.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Observações</mat-label>
+                <textarea formControlName="observacoes" matInput></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Comentários</mat-label>
+                <textarea formControlName="comentarios" matInput></textarea>
+            </mat-form-field>
+
+            <label for=""><h3>Ativo:</h3></label>
+            <mat-radio-group formControlName="ativo" >
+                <mat-radio-button value="true">
+                        Sim.
+                </mat-radio-button>
+                &nbsp;&nbsp;
+                <mat-radio-button value="false">
+                    Não.
+                </mat-radio-button>
+            </mat-radio-group>
+
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addReserva()">Guardar</button>
+    <button mat-raised-button color="secondary" style="margin-left: 8px;" (click)="resetFields()">Limpar</button>
+    <button mat-raised-button color="warn" style="margin-left: 8px;" mat-dialog-close>Cancelar</button>
+</div>

@@ -1,0 +1,17 @@
+<div class="header">
+    <h2 mat-dialog-title>Apagar Pagamento</h2>
+    <button mat-icon-button [mat-dialog-close]="false">
+      <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content>
+  <h3>Esta Operacao Vai Apagar o Registo Pagamento na Base Dados/Sistema.</h3>
+
+  <h4>Tem Certeza que pretende Realizar esta Operacao?</h4>
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button [mat-dialog-close]="false" color="warn" (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button [mat-dialog-close]="true" color="primary" cdkFocusInitial (click)="apagar()">Confirmar</button>
+</div>

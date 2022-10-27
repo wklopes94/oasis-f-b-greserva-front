@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Criar um Novo RestauranteSeating</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formCriarAlterarRestauranteSeating">
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Restaurante</mat-label>
+            <mat-select formControlName="restaurante" placeholder="restaurante">
+                <mat-option *ngFor="let rest of dataSourceRestaurante" [value]="rest.id">{{rest.nome}}</mat-option>                
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Seating</mat-label>
+            <mat-select formControlName="seating" placeholder="seating">
+                <mat-option *ngFor="let seat of dataSourceSeating" [value]="seat.id">{{seat.horaInicio}} - {{seat.horaFim}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>DATA</mat-label>
+            <input formControlName="data"  matInput placeholder="data" type="date"> 
+        </mat-form-field>   
+
+        <mat-form-field appearance="outline">
+            <mat-label>LOTAÇÃO:</mat-label>
+            <input formControlName="lotacao"  matInput placeholder="lotação" type="number"> 
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>MENUS:</mat-label>
+            <mat-select formControlName="menu">
+              <mat-option *ngFor="let men of dataSourceMenu" [value]="men.id">{{men.nome}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+            
+        <label for=""><h3>ATIVO:</h3></label>
+        <mat-radio-group formControlName="ativo" >
+            <mat-radio-button value="true">
+                    Sim.
+            </mat-radio-button>
+            &nbsp;&nbsp;
+            <mat-radio-button value="false">
+                Não.
+            </mat-radio-button>
+        </mat-radio-group>
+            
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addRestauranteSeating()">Guardar</button>
+    <button mat-raised-button color="secondary" style="margin-left: 8px;" (click)="resetFields()">Limpar</button>
+    <button mat-raised-button color="warn" style="margin-left: 8px;" mat-dialog-close>Cancelar</button>
+</div>

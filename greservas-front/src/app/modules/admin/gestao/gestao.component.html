@@ -1,0 +1,69 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <a routerLink="./" mat-list-item>
+        <i class="material-icons">home</i>
+        Home
+      </a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/reserva']" routerLinkActive="active" 
+      >Reservas</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/cliente']" routerLinkActive="active"
+      >Clientes</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/hospede']" routerLinkActive="active"
+      >Hospedes</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/particular']" routerLinkActive="active"
+      >Particulares</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/grupo']" routerLinkActive="active"
+      >Grupos</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/estado']" routerLinkActive="active"
+      >Estados</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/restaurante']" routerLinkActive="active"
+      >Restaurantes</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/seating']" routerLinkActive="active"
+      >Seatings</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/restaurante-seating']" routerLinkActive="active"
+      >Restaurantes & Seatings</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/extras']" routerLinkActive="active"
+      >Extras</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/menu']" routerLinkActive="active"
+      >Menu</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/pagamento']" routerLinkActive="active"
+      >Pagamentos</a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/utilizador']" routerLinkActive="active"
+      >Utilizadores</a>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

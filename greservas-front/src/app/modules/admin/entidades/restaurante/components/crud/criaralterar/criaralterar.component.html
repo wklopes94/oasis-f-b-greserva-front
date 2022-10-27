@@ -1,0 +1,41 @@
+<h1 mat-dialog-title *ngIf="acao=='criar'">CRIAR RESTAURANTE</h1>
+<h1 mat-dialog-title *ngIf="acao=='editar'">EDITAR RESTAURANTE</h1>
+<h1 mat-dialog-title *ngIf="acao=='ver'">DETALHES RESTAURANTE</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formCriarAlterarRestaurante">
+    
+        <mat-form-field appearance="outline">
+            <mat-label>NOME</mat-label>
+            <input formControlName="nome"  matInput placeholder="nome"> 
+        </mat-form-field>   
+
+        <mat-form-field appearance="outline">
+            <mat-label>LOTAÇÃO MÁXIMA:</mat-label>
+            <input formControlName="lotacaoMaxima"  matInput placeholder="lotação maxima" type="number">
+        </mat-form-field>
+            
+        <label for=""><h3>ATIVO:</h3></label>
+        <mat-radio-group formControlName="ativo" >
+            <mat-radio-button value="true" [checked]="ativarS">
+                    Sim.
+            </mat-radio-button>
+            &nbsp;&nbsp;
+            <mat-radio-button value="false" [checked]="ativarN">
+                Não.
+            </mat-radio-button>
+        </mat-radio-group>
+
+        <label *ngIf="acao=='alterar'" for="dataCriacao" formControlName="dataCriacao">Data Criacao: </label>
+        <label *ngIf="acao=='alterar'" for="dataAtualizacao" formControlName="dataAtualizacao">  -   Data Atualizacao: </label>   
+            
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button *ngIf="acao=='criar'" mat-raised-button color="primary" style="margin-left: 8px;" (click)="addRestaurante()">Criar</button>
+    <button *ngIf="acao=='editar'" mat-raised-button color="primary" style="margin-left: 8px;" (click)="editRestaurante()">Guardar</button>
+    <button *ngIf="acao=='ver'" mat-raised-button color="primary" style="margin-left: 8px;" (click)="ativarControlos()">Editar</button>
+    <button *ngIf="acao!='ver'" mat-raised-button color="secondary" style="margin-left: 8px;" (click)="resetFields()">Limpar</button>
+    <button mat-raised-button color="warn" style="margin-left: 8px;" mat-dialog-close>Cancelar</button>
+</div>

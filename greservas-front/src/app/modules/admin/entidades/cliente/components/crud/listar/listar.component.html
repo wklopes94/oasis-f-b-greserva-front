@@ -1,0 +1,85 @@
+<div class="search-div">
+    <button mat-raised-button  (click)="novoCliente()">
+        <mat-icon>add</mat-icon> Novo Cliente
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Procurar" autocomplete="off" (keyup)="applyFilter(searchKey, 'nome')">
+        <button mat-button matSuffix mat-icon-button aria-label="Apagar" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+    <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+    
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+            <p>Algo parece não estar correcto. Aguarde um pouco ou refreca a pagina.</p>
+            <p>Se o erro continuar contacte o seu ADMINISTRADOR</p>
+        </div>
+
+    </div>
+
+    <div class="example-table-container">
+        
+        <table mat-table [dataSource]="cliDataSource" matSort class="example-table">
+                
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                    <td mat-cell *matCellDef="let row">{{row.id}}</td>                     
+                </ng-container>
+
+                <ng-container matColumnDef="tipo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+                    <td mat-cell *matCellDef="let row">{{row.tipo}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="nome">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+                    <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="apelido">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Apelido</th>
+                    <td mat-cell *matCellDef="let row">{{row.apelido}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Em@il</th>
+                    <td mat-cell *matCellDef="let row">{{row.email}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="telefone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefone</th>
+                    <td mat-cell *matCellDef="let row">{{row.telefone}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="ativo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ativo</th>
+                    <td mat-cell *matCellDef="let row">{{row.ativo}}</td>                    
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Ações:<br> &nbsp; Ver &nbsp; | &nbsp; Editar &nbsp; | &nbsp; Apagar </mat-header-cell>
+                    <mat-cell *matCellDef="let row">                         
+                        <button mat-icon-button color="primary" aria-label="ver" (click)="verDetalhesCliente()">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" aria-label="editar"  (click)="editarCliente()">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn"aria-label="apagar"  (click)="apagarCliente()">
+                            <mat-icon>delete</mat-icon>
+                        </button> 
+                    </mat-cell>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>   
+
+</div>

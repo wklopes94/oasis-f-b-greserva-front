@@ -1,0 +1,104 @@
+<div class="search-div">
+    <button mat-raised-button  (click)="editarReserva()">
+        <mat-icon>add</mat-icon> Nova Reserva
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Procurar" autocomplete="off" (keyup)="applyFilter(searchKey, 'nome')">
+        <button mat-button matSuffix mat-icon-button aria-label="Apagar" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+        <table mat-table [dataSource]="resDataSource" matSort  class="example-table">
+
+                <ng-container matColumnDef="dataReserva">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Data </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.dataReserva}} </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="nomeRest">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Restaurante </mat-header-cell>
+                <mat-cell *matCellDef="let row">  {{row.nomeRest}} </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="dataInitSeat">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Seating </mat-header-cell>
+                <mat-cell *matCellDef="let row">  {{row.dataInitSeat}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="nomeCliente">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nome Cliente</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.nomeCliente}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="apelidoCliente">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Apelido Cliente</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.apelidoCliente}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="tipoCliente">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Cliente </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.tipoCliente}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ativo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> 
+                        <div *ngIf="row.ativo===true; else desativo">
+                            Sim
+                        </div>
+                        <ng-template #desativo>
+                            <p>
+                            Não
+                            </p>
+                        </ng-template>
+                    </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="estado">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> Tirar da  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Ações:<br> &nbsp; Ver &nbsp; | &nbsp; Editar &nbsp; | &nbsp; Apagar </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> 
+                        
+                        <button mat-icon-button color="primary" aria-label="ver" (click)="verDetalhesReserva()">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+
+                        <button mat-icon-button color="accent" aria-label="editar"  (click)="editarReserva()">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+
+                        <button mat-icon-button color="warn"aria-label="apagar"  (click)="apagarReserva()">
+                            <mat-icon>delete</mat-icon>
+                        </button> 
+
+                    </mat-cell>
+                </ng-container>
+                                                
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6"> 
+                        <mat-spinner></mat-spinner>
+                    </mat-footer-cell>                    
+                </ng-container>
+
+                <ng-container matColumnDef="nodata">
+                    <mat-footer-cell *matFooterCellDef colspan="6"> 
+                        Nenhuma Informação Encontrada. <!--() colocar uma imagem animada que descreve NODATA - icone no data available -->
+                    </mat-footer-cell>                    
+                </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':reservas!=null}"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide':!(reservas!=null && reservas.length==0)}"></mat-footer-row>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  </div>

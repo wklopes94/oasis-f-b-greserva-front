@@ -1,0 +1,104 @@
+<div class="content"> 
+  
+    <div class="mat-elevation-z8 content-table">
+  
+      <form [formGroup]="formPesquisa" (ngSubmit)="onSubmit" class="form-container">
+  
+        <div class="container"
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+        >
+  
+            <div class="item item-1" fxFlex="none">
+              <mat-form-field class="form-element" >
+                <input formControlName="nome" matInput  placeholder="Nome:">
+              </mat-form-field>
+            </div>
+  
+            <div class="item item-1"fxFlex="none">
+              <mat-checkbox formControlName="activo">Ativo</mat-checkbox>
+            </div>
+  
+            <div class="item item-1"fxFlex="none">
+              <button (click)="onSubmit()" mat-raised-button color="primary" class="mybutton">Pesquisa</button>
+              <button mat-raised-button type="button" (click)="limparPesquisa()"  >Limpar</button>
+            </div>
+            <div class="item item-1"fxFlex></div>
+  
+        </div>
+      </form>  
+  
+      <table mat-table [dataSource]="dataSource" class="table" matSort (matSortChange)="sortEvent = $event; readAll()">
+  
+        <ng-container matColumnDef="nomeCliente">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> NOME </th>
+          <td mat-cell *matCellDef="let row"> {{row.nomeCliente}} </td>
+        </ng-container>
+  
+         <ng-container matColumnDef="apelidoCliente">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> APELIDO </th>
+          <td mat-cell *matCellDef="let row"> {{row.apelidoCliente}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> EM@AIL </th>
+            <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="telefone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> TELEFONE </th>
+            <td mat-cell *matCellDef="let row"> {{row.telefone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="instituicao">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> INSTITUIÇÃO </th>
+            <td mat-cell *matCellDef="let row"> {{row.instituicao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descricao">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIÇÃO </th>
+            <td mat-cell *matCellDef="let row"> {{row.descricao}} </td>
+          </ng-container>        
+          
+        <ng-container matColumnDef="observacao">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> OBSERVAÇÃO </th>
+            <td mat-cell *matCellDef="let row"> {{row.observacao}} </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="ativo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ATIVO </th>
+          <td mat-cell *matCellDef="let row"> {{row.ativo}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="acoes">
+          <th class="mat-header" mat-header-cell *matHeaderCellDef> EDITAR </th>
+          <td mat-cell *matCellDef="let row">
+            <a class="edit" [routerLink]="['../'+row.id+'/editar']" routerLinkActive="active"><i class="material-icons">edit</i></a>
+            <a class="delete" [routerLink]="['../'+row.id+'/apagar']" routerLinkActive="active"><i class="material-icons">delete</i></a>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="carregando"></tr>
+      </table>
+  
+      <mat-paginator [length]="totalElements"
+                 [pageSize]="sizeInicial"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = $event; readAll()"
+                 aria-label="Select page">
+      </mat-paginator>
+  
+      <div *ngIf="carregando" class="spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div *ngIf="!carregando && totalElements === 0" class="spinner">
+        <p>Sem Dados...</p>
+      </div>  
+  
+    </div>
+  
+  </div>
